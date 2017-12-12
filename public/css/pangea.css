@@ -1,0 +1,17 @@
+
+
+.top-spaced{
+    margin-top:15px !important;
+}
+.bottom-spaced{
+    margin-bottom:15px !important;
+}
+
+.bootstrap-dialog .modal-header {
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+}
+
+.modal-body{
+    background-color : #ECF0F5 !important;
+}

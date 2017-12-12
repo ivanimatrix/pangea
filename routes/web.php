@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'LoginController@index');
+Route::post('/Login/validarLogin', 'LoginController@loginUsuario');
+
+Route::get('/Usuario/solicitarPassword', 'UsuarioController@solicitarPassword');
+Route::post('/Usuario/generarPassword', 'UsuarioController@generarPassword');
