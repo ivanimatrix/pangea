@@ -15,3 +15,7 @@
 .modal-body{
     background-color : #ECF0F5 !important;
 }
+
+table.table-middle > tbody > tr > td {
+    vertical-align: middle;
+}

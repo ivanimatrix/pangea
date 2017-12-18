@@ -7,7 +7,7 @@ var Login = {
     /**
      * Validar login de usuario
      * @param form Formulario a validar
-     * @param btn Botom que ejecuta funcion
+     * @param btn Boton que ejecuta funcion
      */
     validar : function(form, btn){
         Pangea.btnProcess(btn, 'Validando');
@@ -73,6 +73,7 @@ var Login = {
                     }else{
                         BootModal.danger(response.mensaje);
                     }
+                    Pangea.btnEndProcess();
                 },
                 error : function(){
                     BootModal.danger(Pangea.msg_error, function(){

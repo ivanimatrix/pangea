@@ -79,7 +79,6 @@
 <!-- iCheck -->
 <script src="{{ asset('public/template/plugins/iCheck/icheck.min.js?' . uniqid()) }}"></script>
 <!-- BootModal -->
-
 <script src="{{ asset('public/js/plugins/bootstrap3-dialog/dist/js/bootstrap-dialog.min.js?' . uniqid()) }}" type="text/javascript"></script>
 <script src="{{ asset('public/js/plugins/bootstrap3-dialog/modal.js?' . uniqid()) }}" type="text/javascript"></script>
 

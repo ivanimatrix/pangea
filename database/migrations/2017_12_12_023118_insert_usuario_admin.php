@@ -21,7 +21,8 @@ class InsertUsuarioAdmin extends Migration
             'apellidos_usuario' => 'General',
             'email_usuario' => 'admin.general@pangea.cl',
             'pass_usuario' => Hash::make('demo'),
-            'imagen_usuario' => ''
+            'imagen_usuario' => '',
+            'registro_usuario' => date('Y-m-d')
         ]);
 
         DB::table('perfiles_usuarios')->insert([
