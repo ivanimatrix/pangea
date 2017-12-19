@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SolicitarPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use App\Usuarios as Usuarios;
 
 class UsuarioController extends Controller
@@ -31,11 +33,11 @@ class UsuarioController extends Controller
             'mensaje' => 'No se ha generado nueva contraseña. Intente nuevamente'
         ];
         
-        $pass = '';
+        $pass = str_random(10);
 
         $email = trim($request->get('email'));
 
-        if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+        if(filter_var($email, FILTER_VALIDATE_EMAIL) !== false){
             $usuarios = new Usuarios();
 
             $usuario = $usuarios->where('email_usuario', $email)->first();
@@ -43,6 +45,10 @@ class UsuarioController extends Controller
                 $pass_hash = Hash::make($pass);
                 $usuario->pass_usuario = $pass_hash;
                 if($usuario->save()){
+                    /* enviar correo con nueva password */
+                    Mail::to($usuario->email_usuario, $usuario->nombres_usuario)
+                        ->send(new SolicitarPassword($usuario->nombres_usuario. ' ' .$usuario->apellidos_usuario, $pass));
+
                     $response['estado'] = true;
                     $response['mensaje'] = 'Se ha generado una solicitud de nueva contraseña, la cual ha sido enviada a su correo';
                 }else{

@@ -69,11 +69,15 @@ var Login = {
                 dataType : 'json',
                 success : function(response){
                     if(response.estado){
-                        BootModal.success(response.mensaje);
+                        BootModal.success(response.mensaje, function(){
+                            BootModal.closeAll();
+                        });
                     }else{
-                        BootModal.danger(response.mensaje);
+                        BootModal.danger(response.mensaje, function(){
+                            Pangea.btnEndProcess();
+                        });
                     }
-                    Pangea.btnEndProcess();
+
                 },
                 error : function(){
                     BootModal.danger(Pangea.msg_error, function(){
