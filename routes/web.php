@@ -35,3 +35,6 @@ Route::get('/MantenedorUsuarios/editar/{id_usuario}', 'MantenedorUsuariosControl
 Route::post('/MantenedorUsuarios/guardar', 'MantenedorUsuariosController@guardarUsuario');
 Route::post('/MantenedorUsuario/cargarUsuario', 'MantenedorUsuariosController@cargarPerfilUsuario');
 Route::post('/MantenedorUsuario/cerrarPerfilUsuario', 'MantenedorUsuariosController@cerrarPerfilUsuario');
+
+/** PROYECTOS */
+Route::get('/Proyectos/nuevo', 'ProyectosController@formProyecto');

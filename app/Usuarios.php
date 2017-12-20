@@ -23,8 +23,8 @@ class Usuarios extends Model
     }
 
 
-    public function getPerfilActivo(){
-        return \DB::table('perfiles_usuarios')->where('activo_pu', 1)->first();
+    public function getPerfilActivo($id_usuario){
+        return \DB::table('perfiles_usuarios')->where(['activo_pu'=> 1,'usuario_fk_pu' => $id_usuario])->first();
     }
 
 }

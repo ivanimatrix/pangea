@@ -68,8 +68,8 @@ class MantenedorUsuariosController extends Controller
         ];
 
         $guardar = false;
-        if($request->get('id') > 0){
-            $usuario = $this->_Usuarios->find($request->get('id'));
+        if($request->get('id_usuario') > 0){
+            $usuario = $this->_Usuarios->find($request->get('id_usuario'));
         }else{
             $usuario = $this->_Usuarios;
             $usuario->pass_usuario = \Hash::make($request->get('rut'));
@@ -107,7 +107,7 @@ class MantenedorUsuariosController extends Controller
             session()->put('nombres', $usuario->nombres_usuario);
             session()->put('apellidos', $usuario->apellidos_usuario);
             session()->put('avatar', $usuario->imagen_usuario);
-            session()->put('perfil', $usuario->getPerfilActivo()->perfil_fk_pu);
+            session()->put('perfil', $usuario->getPerfilActivo($usuario->id_usuario)->id_perfil);
 
             $response['estado'] = true;
             $response['redirect'] = url('/Home/dashboard');
@@ -131,7 +131,7 @@ class MantenedorUsuariosController extends Controller
             session()->put('nombres', $usuario->nombres_usuario);
             session()->put('apellidos', $usuario->apellidos_usuario);
             session()->put('avatar', $usuario->imagen_usuario);
-            session()->put('perfil', $usuario->getPerfilActivo()->perfil_fk_pu);
+            session()->put('perfil', $usuario->getPerfilActivo($usuario->id_usuario)->perfil_fk_pu);
 
             $response['estado'] = true;
             $response['redirect'] = url('/MantenedorUsuarios/index');
