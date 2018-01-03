@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RegistrarUsuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 use App\Usuarios;
 
@@ -67,14 +69,17 @@ class MantenedorUsuariosController extends Controller
             'mensaje' => 'Hubo un problema al guardar los datos. Intente nuevamente'
         ];
 
+        $enviar_mail = false;
         $guardar = false;
         if($request->get('id_usuario') > 0){
             $usuario = $this->_Usuarios->find($request->get('id_usuario'));
         }else{
+            $pass = str_random(10);
             $usuario = $this->_Usuarios;
-            $usuario->pass_usuario = \Hash::make($request->get('rut'));
+            $usuario->pass_usuario = \Hash::make($pass);
             $usuario->imagen_usuario = 'public/img/user_default.png';
             $usuario->registro_usuario = date('Y-m-d');
+            $enviar_mail = true;
         }
         $usuario->rut_usuario = $request->get('rut');
         $usuario->nombres_usuario = $request->get('nombres');
@@ -86,6 +91,13 @@ class MantenedorUsuariosController extends Controller
             foreach($perfiles as $perfil){
                 $usuario->perfiles()->attach($perfil, ['activo_pu' => 0]);
             }
+
+            if($enviar_mail){
+                /* enviar correo con nueva password */
+                Mail::to($usuario->email_usuario, $usuario->nombres_usuario)
+                    ->send(new RegistrarUsuario($usuario->nombres_usuario. ' ' .$usuario->apellidos_usuario, $usuario->rut_usuario, $pass));
+            }
+
             $response['estado'] = true;
             $response['mensaje'] = 'Datos guardados correctamente';
         }
@@ -107,10 +119,15 @@ class MantenedorUsuariosController extends Controller
             session()->put('nombres', $usuario->nombres_usuario);
             session()->put('apellidos', $usuario->apellidos_usuario);
             session()->put('avatar', $usuario->imagen_usuario);
-            session()->put('perfil', $usuario->getPerfilActivo($usuario->id_usuario)->id_perfil);
+            if($usuario->getPerfilActivo($usuario->id_usuario)){
+                $response['redirect'] = url('/Home/dashboard');
+                session()->put('perfil', $usuario->getPerfilActivo($usuario->id_usuario)->perfil_fk_pu);
+            }else{
+                $response['redirect'] = url('/Home/cargarPerfil');
+            }
 
             $response['estado'] = true;
-            $response['redirect'] = url('/Home/dashboard');
+            
         }else{
             $response['estado'] = false;
             $response['mensaje'] = 'Usuario no encontrado';

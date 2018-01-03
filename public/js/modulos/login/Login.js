@@ -13,7 +13,7 @@ var Login = {
         Pangea.btnProcess(btn, 'Validando');
 
         var error = "";
-        if(form.rut.value == ""){
+        if(!Validaciones.validaRut(form.rut.value)){
             error += 'Debe ingresar su rut válido <br/>';
         }
         if(form.pass.value == ""){
@@ -57,7 +57,7 @@ var Login = {
         Pangea.btnProcess(btn, 'Solicitando');
 
         var error = "";
-        if(form.email.value == ""){
+        if(!Validaciones.validaEmail(form.email.value)){
             BootModal.danger('Debe ingresar un correo válido', function(){
                 Pangea.btnEndProcess();
             });

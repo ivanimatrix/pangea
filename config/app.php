@@ -167,6 +167,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -229,6 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         /** Fechas */
         'Fechas' => App\Helpers\Pangea\Fechas::class,
+        'Usuario' => App\Helpers\Pangea\Usuario::class,
     ],
 
 ];

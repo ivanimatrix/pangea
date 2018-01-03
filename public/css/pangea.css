@@ -19,3 +19,11 @@
 table.table-middle > tbody > tr > td {
     vertical-align: middle;
 }
+
+.item_hito{
+    border-bottom: 1px solid #000;
+}
+
+.no-resize{
+    resize: none;
+}

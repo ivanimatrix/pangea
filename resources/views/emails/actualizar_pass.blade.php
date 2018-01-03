@@ -1,9 +1,9 @@
 <h1>Pangea :: Gestor de Proyectos</h1>
 
-<h3>Solicitud de nueva contraseña</h3>
+<h3>Cambio de contraseña</h3>
 
 <p>Estimado/a {{ $nombre }}:</p>
-<p>Ud. ha solicitado una nueva contraseña para su cuenta. La nueva contraseña es <strong>{{ $pass }}</strong></p>
+<p>Ud. ha realizado un cambio de contraseña. La nueva contraseña es <strong>{{ $pass }}</strong></p>
 
 <p>Si ud. no ha realizado esta acción, por favor comunicarse con Soporte</p>
 

@@ -31,4 +31,29 @@ class Proyectos extends Model
         return $this->hasMany('App\EventosProyectos', 'proyecto_fk_evp', 'id_proyecto');
     }
 
+    /**
+     * Hitos de un proyecto
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function hitosProyecto(){
+        return $this->hasMany('App\HitosProyectos','proyecto_fk_hito', 'id_proyecto');
+    }
+
+    /**
+     * Obtener estado de proyecto
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function estadoProyecto()
+    {
+        return $this->hasOne('App\EstadosProyectos', 'id_ep','estado_fk_proyecto');
+    }
+
+    /**
+     * Obtener los roles del proyecto
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function rolesProyecto()
+    {
+        return $this->hasMany('App\RolesProyectos', 'proyecto_fk_rp', 'id_proyecto');
+    }
 }

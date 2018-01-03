@@ -38,7 +38,8 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>Pangea</b></a>
+    <a href="#"><b>PANGEA</b></a><br/>
+    <small>Gestor de Proyectos</small>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
@@ -81,6 +82,8 @@
 <!-- BootModal -->
 <script src="{{ asset('public/js/plugins/bootstrap3-dialog/dist/js/bootstrap-dialog.min.js?' . uniqid()) }}" type="text/javascript"></script>
 <script src="{{ asset('public/js/plugins/bootstrap3-dialog/modal.js?' . uniqid()) }}" type="text/javascript"></script>
+
+<script src="{{ asset('public/js/plugins/validaciones.js?' . uniqid()) }}" type="text/javascript"></script>
 
 <!-- js Pangea -->
 <script src="{{ asset('public/js/pangea.js?' . uniqid()) }}" type="text/javascript"></script>

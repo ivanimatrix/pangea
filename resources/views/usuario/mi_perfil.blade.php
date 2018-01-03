@@ -14,8 +14,8 @@
             <div class="col-xs-12 col-md-4">
                 <div class="box box-primary">
                     <div class="box-body box-profile">
-                        <img class="profile-user-img img-responsive img-circle" src="{{ asset(session()->get('avatar')) }}" alt="User profile picture">
-
+                        <button type="button" class="btn btn-default btn-xs btn-flat pull-right" title="CAMBIAR AVATAR" onclick="BootModal.open('{{ url('/Usuario/avatar') }}','Editar Avatar');"><i class="fa fa-edit"></i></button>
+                        <img class="profile-user-img img-responsive img-circle" src="{{ asset(Usuario::getImagenUsuario(session()->get('id'))) }}" alt="User profile picture" id="img-avatar-usuario">
                         <h3 class="profile-username text-center">
                             {{ $usuario->nombres_usuario }} {{ $usuario->apellidos_usuario }}
                         </h3>
@@ -41,49 +41,23 @@
                     <!-- /.box-body -->
                 </div>
 
+            </div>
+
+            <div class="col-xs-12 col-md-8">
+
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">Información adicional</h3>
                     </div>
-                    <!-- /.box-header -->
                     <div class="box-body">
                         <strong><i class="fa fa-book margin-r-5"></i> Perfiles</strong>
 
                         <p class="text-muted">
-                            B.S. in Computer Science from the University of Tennessee at Knoxville
+                            @foreach($usuario->perfiles as $perfil)
+                                <span class="label label-primary">{{ $perfil->nombre_perfil }}</span>
+                            @endforeach
                         </p>
-
-                        <hr>
-
-                        <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
-
-                        <p class="text-muted">Malibu, California</p>
-
-                        <hr>
-
-                        <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
-
-                        <p>
-                            <span class="label label-danger">UI Design</span>
-                            <span class="label label-success">Coding</span>
-                            <span class="label label-info">Javascript</span>
-                            <span class="label label-warning">PHP</span>
-                            <span class="label label-primary">Node.js</span>
-                        </p>
-
-                        <hr>
-
-                        <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
                     </div>
-                    <!-- /.box-body -->
-                </div>
-            </div>
-            <div class="col-xs-12 col-md-8">
-
-
-                <div class="box box-primary">
                     <div class="box-header with-border">
                         <div class="box-title">Mi actividad</div>
                     </div>

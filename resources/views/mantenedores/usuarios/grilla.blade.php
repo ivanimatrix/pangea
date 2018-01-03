@@ -5,6 +5,7 @@
         <th>Nombres</th>
         <th>Apellidos</th>
         <th>Email</th>
+        <th>Avatar</th>
         <th></th>
     </tr>
     </thead>
@@ -16,6 +17,9 @@
                 <td>{{ $usuario->nombres_usuario }}</td>
                 <td>{{ $usuario->apellidos_usuario }}</td>
                 <td>{{ $usuario->email_usuario }}</td>
+                <td>
+                    <img class="img-responsive" src="{{ url(Usuario::getImagenUsuario($usuario->id_usuario)) }}" style="height: 36px" />
+                </td>
                 <td class="text-center">
                     <div class="btn-group">
                         @if($usuario->id_usuario != session()->get('id'))

@@ -36,7 +36,7 @@ class LoginController extends Controller
             session()->put('id', $usuario->id_usuario);
             session()->put('nombres', $usuario->nombres_usuario);
             session()->put('apellidos', $usuario->apellidos_usuario);
-            session()->put('avatar', $usuario->imagen_usuario);
+            //session()->put('avatar', $usuario->imagen_usuario);
             session()->put('perfil', $usuario->getPerfilActivo($usuario->id_usuario)->perfil_fk_pu);
 
             $response['estado'] = true;
