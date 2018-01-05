@@ -27,4 +27,9 @@ class Usuarios extends Model
         return \DB::table('perfiles_usuarios')->where(['activo_pu'=> 1,'usuario_fk_pu' => $id_usuario])->first();
     }
 
+
+    /*public function roles(){
+        return $this->belongsToMany('App\RolesProyectos', 'roles_usuarios', 'usuario_fk_ru', 'rol_fk_ru');
+    }*/
+
 }

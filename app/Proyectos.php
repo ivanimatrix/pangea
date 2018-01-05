@@ -56,4 +56,9 @@ class Proyectos extends Model
     {
         return $this->hasMany('App\RolesProyectos', 'proyecto_fk_rp', 'id_proyecto');
     }
+
+    public function usuariosProyecto()
+    {
+        return $this->hasMany('App\UsuariosProyectos', 'proyecto_fk_up', 'id_proyecto');
+    }
 }

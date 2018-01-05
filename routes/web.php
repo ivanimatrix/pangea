@@ -59,3 +59,5 @@ Route::get('/ProyectosLider/editarRol/{id}/{id_rol}', 'ProyectosLiderController@
 Route::post('/ProyectosLider/guardarRolProyecto', 'ProyectosLiderController@guardarRolProyecto');
 Route::get('/RolesProyecto/listado/{id_proyecto}', 'RolesProyectoController@getRolesProyecto');
 Route::post('/RolesProyecto/eliminarRol', 'RolesProyectoController@eliminarRol');
+Route::get('/UsuariosProyecto/nuevoUsuario/{id_proyecto}', 'UsuariosProyectoController@formUsuarioProyecto');
+Route::post('/UsuariosProyecto/guardar', 'UsuariosProyectoController@guardarUsuario');
