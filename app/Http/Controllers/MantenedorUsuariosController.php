@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\EventosUsuarios;
+use App\Perfiles;
 use App\Mail\RegistrarUsuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -19,22 +21,37 @@ class MantenedorUsuariosController extends Controller
     /**
      * @var \App\Perfiles
      */
-    private $_Pefiles;
+    private $_Perfiles;
+
+    /** @var EventosUsuarios */
+    private $_EventosUsuarios;
 
     public function __construct()
     {
-        $this->_Usuarios = new \App\Usuarios;
+        $this->_Usuarios = new Usuarios();
+        $this->_EventosUsuarios = new EventosUsuarios();
+        $this->_Perfiles = new Perfiles();
     }
 
 
     public function index()
     {
-        return view('mantenedores.usuarios.index');
+        $this->_Perfiles = new Perfiles();
+        $data = [
+            'perfiles' => $this->_Perfiles->get()
+        ];
+
+        return view('mantenedores.usuarios.index', $data);
     }
 
-    public function listado()
-    {
-        $usuarios = $this->_Usuarios->all();
+    public function listado($id_perfil = null)
+    {   
+        if(!is_null($id_perfil)){
+            $perfil = $this->_Perfiles->find($id_perfil);
+            $usuarios = $perfil->usuarios;
+        } else {
+            $usuarios = $this->_Usuarios->all();
+        }
 
         return view('mantenedores.usuarios.grilla', ['usuarios' => $usuarios]);
     }
@@ -93,6 +110,13 @@ class MantenedorUsuariosController extends Controller
             }
 
             if($enviar_mail){
+                $insertEventoUsuario = [
+                    'usuario_fk_eu' => session()->get('id'),
+                    'fecha_eu' => date('Y-m-d H:i:s'),
+                    'detalle_eu' => 'Se registra nuevo usuario ' . $usuario->nombres_usuario. ' ' .$usuario->apellidos_usuario,
+                ];
+                $this->_EventosUsuarios->insert($insertEventoUsuario);
+
                 /* enviar correo con nueva password */
                 Mail::to($usuario->email_usuario, $usuario->nombres_usuario)
                     ->send(new RegistrarUsuario($usuario->nombres_usuario. ' ' .$usuario->apellidos_usuario, $usuario->rut_usuario, $pass));

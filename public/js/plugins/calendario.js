@@ -2,6 +2,11 @@ document.write('<link href="'+url_base+'/public/template/bower_components/bootst
 document.write('<script src="'+url_base+'/public/template/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" type="text/javascript"></script>');
 document.write('<script src="'+url_base+'/public/template/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js" type="text/javascript"></script>');
 
+document.write('<link href="'+url_base+'/public/template/bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet" />');
+document.write('<link href="'+url_base+'/public/template/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print" />');
+document.write('<script src="'+url_base+'/public/template/bower_components/moment/moment.js" type="text/javascript"></script>');
+document.write('<script src="'+url_base+'/public/template/bower_components/fullcalendar/dist/fullcalendar.min.js" type="text/javascript"></script>');
+document.write('<script src="'+url_base+'/public/template/bower_components/fullcalendar/dist/locale/es.js" type="text/javascript"></script>');
 
 
 var Calendario = {
@@ -28,7 +33,8 @@ var Calendario = {
                 });
             });
 
-
+			
+			
 
 
 
@@ -38,6 +44,13 @@ var Calendario = {
 				autoclose: true,
 				weekStart : 1
 			});*/
+		});
+	},
+
+
+	showCalendar : function (calendario, eventos) {
+		$("#" + calendario).fullCalendar({
+			events : eventos
 		});
 	}
 	/*datePicker : function(){
@@ -92,7 +105,7 @@ $(document).ready(function(){
 		currentText: 'Ahora',
 		closeText: 'Hecho'
 	});*/
-}
+};
 
 
 Calendario.init();

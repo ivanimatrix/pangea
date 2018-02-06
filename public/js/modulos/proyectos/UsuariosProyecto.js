@@ -3,9 +3,8 @@ var UsuariosProyecto = {
 
     guardarUsuarioProyecto : function (form, btn){
         Pangea.btnProcess(btn, 'Guardando');
-
         var error = "";
-        if(form.id_usuario.value === ""){
+        if(form.id_usuario.value === "0" && form.integrante.value === ""){
             error += "Debe seleccionar al integrante<br/>";
         }
         if($('.roles_usuario:checked').length == 0){
@@ -26,6 +25,7 @@ var UsuariosProyecto = {
                     if (response.estado) {
                         BootModal.success(response.mensaje, function () {
                             BootModal.closeAll();
+                            UsuariosProyecto.listadoUsuariosProyecto(form.proyecto.value);
                         });
                     } else {
                         BootModal.danger(response.mensaje, function () {
@@ -43,6 +43,14 @@ var UsuariosProyecto = {
     },
 
     listadoUsuariosProyecto : function (proyecto) {
-
+        $.ajax({
+            url : url_base + '/UsuariosProyecto/listado/' + proyecto,
+            data : {},
+            dataType : 'html',
+            type : 'get',
+            success : function (response){
+                $("#contenedor-integrantes").html(response);
+            }
+        })
     }
 };

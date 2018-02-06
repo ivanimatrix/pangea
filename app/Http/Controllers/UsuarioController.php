@@ -196,6 +196,7 @@ class UsuarioController extends Controller
         $perfil = $request->get('perfil');
 
         $usuario = $this->_Usuarios->find(session()->get('id'));
+        $usuario->perfiles()->updateExistingPivot(session()->get('perfil'), ['activo_pu' => 0]);
         if($usuario->perfiles()->updateExistingPivot($perfil, ['activo_pu' => 1])){
             $response['estado'] = true;
             $response['mensaje'] = 'Perfil cargado';

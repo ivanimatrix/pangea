@@ -94,7 +94,7 @@ var BootModal = {
 
         BootstrapDialog.show({
             size : modal_size,
-            closable : false,
+            closable : true,
 			cssClass : modal_xlg,
 			closeByBackdrop: false,
             closeByKeyboard: false,

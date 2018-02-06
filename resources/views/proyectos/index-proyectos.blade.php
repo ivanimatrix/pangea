@@ -12,7 +12,7 @@
     <section class="content">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <button type="button" class="btn btn-flat btn-primary pull-right" onclick="window.location.href='{{ url('/Proyectos/nuevo') }}'">Nuevo Proyecto</button>
+                <button type="button" class="btn btn-flat btn-primary pull-right" onclick="BootModal.open('{{ url('/Proyectos/nuevo') }}','Nuevo Proyecto');">Nuevo Proyecto</button>
             </div>
             <div class="box-body">
                 <div class="table-responsive" id="contenedor-listado-proyectos"></div>
@@ -23,6 +23,7 @@
 
 
 @section('js')
+    <script src="{{ asset('public/js/plugins/calendario.js') }}" type="text/javascript"></script>
     <script src="{{ url('public/js/plugins/dataTables.js') }}" type="text/javascript"></script>
     <script src="{{ url('public/js/modulos/proyectos/Proyectos.js?' . uniqid()) }}" type="text/javascript"></script>
     <script type="text/javascript">

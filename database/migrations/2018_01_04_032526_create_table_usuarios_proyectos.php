@@ -14,10 +14,11 @@ class CreateTableUsuariosProyectos extends Migration
     public function up()
     {
         Schema::create('usuarios_proyectos', function (Blueprint $table) {
+            $table->bigIncrements('id_up');
             $table->unsignedBigInteger('usuario_fk_up');
             $table->unsignedBigInteger('proyecto_fk_up');
             $table->date('fecha_registro_up');
-            $table->primary(['usuario_fk_up', 'proyecto_fk_up']);
+            $table->unique(['usuario_fk_up', 'proyecto_fk_up']);
             $table->foreign('usuario_fk_up')
                 ->references('id_usuario')
                 ->on('usuarios');

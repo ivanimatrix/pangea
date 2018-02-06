@@ -5,7 +5,7 @@
         <th>Nombres</th>
         <th>Apellidos</th>
         <th>Email</th>
-        <th>Avatar</th>
+        <th class="text-center">Avatar</th>
         <th></th>
     </tr>
     </thead>
@@ -18,7 +18,7 @@
                 <td>{{ $usuario->apellidos_usuario }}</td>
                 <td>{{ $usuario->email_usuario }}</td>
                 <td>
-                    <img class="img-responsive" src="{{ url(Usuario::getImagenUsuario($usuario->id_usuario)) }}" style="height: 36px" />
+                    <img class="img-responsive center-block" src="{{ url(Usuario::getImagenUsuario($usuario->id_usuario)) }}" style="height: 36px" />
                 </td>
                 <td class="text-center">
                     <div class="btn-group">

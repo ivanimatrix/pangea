@@ -25,5 +25,6 @@ class PangeaServiceProvider extends ServiceProvider
     {
         require_once app_path() . "/Helpers/Pangea/Fechas.php";
         require_once app_path() . "/Helpers/Pangea/Usuario.php";
+        require_once app_path() . "/Helpers/Pangea/Proyecto.php";
     }
 }

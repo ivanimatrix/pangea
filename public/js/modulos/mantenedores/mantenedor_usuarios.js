@@ -2,6 +2,24 @@
 var MantenedorUsuarios = {
 
     /**
+     * Filtrar listado de usuarios
+     */
+    filtrarUsuarios : function (form, btn) {
+        Pangea.btnProcess(btn, 'Filtrando');
+        $.ajax({
+            url : url_base + '/MantenedorUsuarios/listado/' + form.filtro_perfil.value,
+            data : {},
+            type : 'get',
+            dataType : 'html',
+            success : function(response){
+                $("#contenedor-grilla-usuarios").html(response);
+                Dtables.initTable('grilla-usuarios');
+                Pangea.btnEndProcess();
+            }
+        });
+    },
+
+    /**
      * Cargar listado de usuarios
      */
     cargarGrillaUsuarios : function(){
@@ -24,11 +42,29 @@ var MantenedorUsuarios = {
      */
     guardarUsuario : function(form, btn){
         Pangea.btnProcess(btn, 'Guardando');
-
+        
         var error = "";
 
-        if(error !== ""){
+        if(Validaciones.validaRut(form.rut.value) === false){
+            error += 'RUT de usuario mal formado<br/>';
+        }
+        if(form.nombres.value === ""){
+            error += 'Falta ingresar los nombres del usuario <br/>';
+        }
+        if(form.apellidos.value === ""){
+            error += 'Falta ingresar apellidos del usuario <br/>';
+        }
+        if(Validaciones.validaEmail(form.email.value) === false){
+            error += 'Debe ingresar un email válido';
+        }
+        if($('.perfiles:checked').length == 0){
+            error += 'Debe seleccionar al menos un perfil para el usuario<br/>';
+        }
 
+        if(error !== ""){
+            BootModal.danger(error, function () {
+                Pangea.btnEndProcess();
+            });
         }else{
             $.ajax({
                 url : url_base + '/MantenedorUsuarios/guardar',

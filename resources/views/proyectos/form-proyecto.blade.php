@@ -1,20 +1,8 @@
-@extends('template')
-
-@section('content')
-
-    <section class="content-header">
-        <h1>
-            Datos Proyecto
-            <small>Proyectos</small>
-        </h1>
-    </section>
-
-    <section class="content">
+<div class="row">
+    <div class="col-xs-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <div class="box-title">
-                    Formulario de Proyecto
-                </div>
+
                 <form class="form-horizontal" role="form">
                     <input type="hidden" name="proyecto_id" id="proyecto_id" value="@if($proyecto){{ $proyecto->id_proyecto }}@else{{ '0' }}@endif" />
                     <div class="box-body">
@@ -37,7 +25,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-xs-12 col-sm-6 col-md-4">Responsable</label>
-                            <div class="col-xs-12 col-sm-6 col-md-4">
+                            <div class="col-xs-12 col-sm-6 col-md-8">
                                 <select class="form-control" name="responsable_proyecto" id="responsable_proyecto">
                                     <option value="">Seleccione responsable...</option>
                                     @if($usuarios)
@@ -46,6 +34,12 @@
                                         @endforeach
                                     @endif
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-6 col-md-4">Descripción</label>
+                            <div class="col-xs-12 col-sm-6 col-md-8">
+                                <textarea class="form-control no-resize" name="descripcion_proyecto" id="descripcion_proyecto" rows="5">@if($proyecto){{ $proyecto->descripcion_proyecto }}@endif</textarea>
                             </div>
                         </div>
                         {{--<div class="form-group">
@@ -103,12 +97,9 @@
                 </form>
             </div>
         </div>
-    </section>
+    </div>
+</div>
 
-@endsection
-
-
-@section('js')
-    <script src="{{ asset('public/js/plugins/calendario.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/js/modulos/proyectos/Proyectos.js') }}" type="text/javascript"></script>
-@endsection
+<script type="text/javascript">
+    Calendario.init();
+</script>

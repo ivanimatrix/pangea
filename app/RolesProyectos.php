@@ -22,6 +22,6 @@ class RolesProyectos extends Model
     }
 
     public function usuarios(){
-        return $this->belongsToMany('App\UsuariosProyectos','usuarios_roles','rol_fk_ur', 'usuario_fk_ur');
+        return $this->belongsToMany('App\UsuariosProyectos','usuarios_roles','rol_fk_ur', 'integrante_fk_ur');
     }
 }

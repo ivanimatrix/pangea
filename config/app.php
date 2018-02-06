@@ -178,8 +178,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         // App\Helpers\Pangea
-        App\Providers\EventServiceProvider::class,
-
+        App\Providers\PangeaServiceProvider::class,
+        // PDF
+        niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
     ],
 
     /*
@@ -231,6 +232,9 @@ return [
         /** Fechas */
         'Fechas' => App\Helpers\Pangea\Fechas::class,
         'Usuario' => App\Helpers\Pangea\Usuario::class,
+        'Proyecto' => App\Helpers\Pangea\Proyecto::class,
+        // PDF
+        'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
     ],
 
 ];

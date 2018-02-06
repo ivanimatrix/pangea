@@ -58,7 +58,7 @@
         
         <!-- /.col -->
         <div class="col-xs-12">
-          <button type="button" class="btn btn-primary btn-block btn-flat" onclick="Login.validar(this.form, this);">Entrar</button>
+          <button type="button" class="btn btn-primary btn-block btn-flat btn-lg" onclick="Login.validar(this.form, this);">Entrar</button>
         </div>
         <!-- /.col -->
       </div>

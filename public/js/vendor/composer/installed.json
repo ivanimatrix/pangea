@@ -1,0 +1,45 @@
+[
+    {
+        "name": "nnnick/chartjs",
+        "version": "v2.7.1",
+        "version_normalized": "2.7.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/chartjs/Chart.js.git",
+            "reference": "0fead21939b92c15093c1b7d5ee2627fb5900fff"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/chartjs/Chart.js/zipball/0fead21939b92c15093c1b7d5ee2627fb5900fff",
+            "reference": "0fead21939b92c15093c1b7d5ee2627fb5900fff",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "time": "2017-10-28T15:01:52+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "release/2.0": "v2.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "NICK DOWNIE",
+                "email": "hello@nickdownie.com"
+            }
+        ],
+        "description": "Simple HTML5 charts using the canvas element.",
+        "homepage": "http://www.chartjs.org/",
+        "keywords": [
+            "JS",
+            "chart"
+        ]
+    }
+]

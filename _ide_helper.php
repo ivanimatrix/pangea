@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.5.23 on 2018-01-01.
+ * Generated for Laravel 5.5.32 on 2018-01-23.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -1885,7 +1885,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the session store used by the guard.
          *
-         * @return \Illuminate\Contracts\Session\Session. 
+         * @return \Illuminate\Contracts\Session\Session 
          * @static 
          */ 
         public static function getSession()
@@ -2179,6 +2179,17 @@ namespace Illuminate\Support\Facades {
         public static function setEchoFormat($format)
         {
             \Illuminate\View\Compilers\BladeCompiler::setEchoFormat($format);
+        }
+        
+        /**
+         * Set the echo format to double encode entities.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function doubleEncode()
+        {
+            \Illuminate\View\Compilers\BladeCompiler::doubleEncode();
         }
         
         /**
@@ -5819,7 +5830,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param string|array $view
          * @param array $data
-         * @return \Illuminate\View\View 
+         * @return string 
          * @static 
          */ 
         public static function render($view, $data = array())
@@ -6936,24 +6947,24 @@ namespace Illuminate\Support\Facades {
          * Merge new input into the current request's input array.
          *
          * @param array $input
-         * @return void 
+         * @return \Illuminate\Http\Request 
          * @static 
          */ 
         public static function merge($input)
         {
-            \Illuminate\Http\Request::merge($input);
+            return \Illuminate\Http\Request::merge($input);
         }
         
         /**
          * Replace the input for the current request.
          *
          * @param array $input
-         * @return void 
+         * @return \Illuminate\Http\Request 
          * @static 
          */ 
         public static function replace($input)
         {
-            \Illuminate\Http\Request::replace($input);
+            return \Illuminate\Http\Request::replace($input);
         }
         
         /**
@@ -10976,6 +10987,17 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
+         * Flush the Flysystem cache.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushCache()
+        {
+            \Illuminate\Filesystem\FilesystemAdapter::flushCache();
+        }
+        
+        /**
          * Get the Flysystem driver.
          *
          * @return \League\Flysystem\FilesystemInterface 
@@ -11192,6 +11214,17 @@ namespace Illuminate\Support\Facades {
         public static function defaults($defaults)
         {
             \Illuminate\Routing\UrlGenerator::defaults($defaults);
+        }
+        
+        /**
+         * Get the default named parameters used by the URL generator.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getDefaultParameters()
+        {
+            return \Illuminate\Routing\UrlGenerator::getDefaultParameters();
         }
         
         /**
@@ -12253,6 +12286,52 @@ namespace App\Helpers\Pangea {
     }
 
     class Usuario {
+         
+    }
+ 
+}
+
+namespace niklasravnsborg\LaravelPdf\Facades { 
+
+    class Pdf {
+        
+        /**
+         * Load a HTML string
+         *
+         * @param string $html
+         * @return \niklasravnsborg\LaravelPdf\Pdf 
+         * @static 
+         */ 
+        public static function loadHTML($html, $config = array())
+        {
+            return \niklasravnsborg\LaravelPdf\PdfWrapper::loadHTML($html, $config);
+        }
+        
+        /**
+         * Load a HTML file
+         *
+         * @param string $file
+         * @return \niklasravnsborg\LaravelPdf\Pdf 
+         * @static 
+         */ 
+        public static function loadFile($file, $config = array())
+        {
+            return \niklasravnsborg\LaravelPdf\PdfWrapper::loadFile($file, $config);
+        }
+        
+        /**
+         * Load a View and convert to HTML
+         *
+         * @param string $view
+         * @param array $data
+         * @param array $mergeData
+         * @return \niklasravnsborg\LaravelPdf\Pdf 
+         * @static 
+         */ 
+        public static function loadView($view, $data = array(), $mergeData = array(), $config = array())
+        {
+            return \niklasravnsborg\LaravelPdf\PdfWrapper::loadView($view, $data, $mergeData, $config);
+        }
          
     }
  
@@ -14374,6 +14453,8 @@ namespace  {
     class Fechas extends \App\Helpers\Pangea\Fechas {}
 
     class Usuario extends \App\Helpers\Pangea\Usuario {}
+
+    class PDF extends \niklasravnsborg\LaravelPdf\Facades\Pdf {}
  
 }
 

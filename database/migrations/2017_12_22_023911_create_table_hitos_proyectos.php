@@ -17,6 +17,7 @@ class CreateTableHitosProyectos extends Migration
             $table->bigIncrements('id_hito');
             $table->string('nombre_hito',1000);
             $table->unsignedBigInteger('proyecto_fk_hito');
+            $table->text('descripcion_hito')->nullable();
             //$table->timestamps();
 
             $table->foreign('proyecto_fk_hito')

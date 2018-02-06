@@ -11,7 +11,18 @@
     <section class="content">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <button type="button" class="btn btn-flat btn-sm btn-primary pull-right" onclick="BootModal.open(url_base + '/MantenedorUsuarios/nuevo','Agregar Nuevo Usuario');">Agregar Nuevo Usuario</button>
+                <form role="form" class="form-inline">
+                    <label>Filtrar por perfil</label>
+                    <select class="form-control" name="filtro_perfil" id="filtro_perfil">
+                        <option value="">Todos</option>
+                        @foreach ($perfiles as $item)
+                            <option value="{{ $item->id_perfil }}">{{ $item->nombre_perfil}}</option>
+                        @endforeach
+                    </select>
+                    <button type="button" class="btn btn-primary btn-flat" onclick="MantenedorUsuarios.filtrarUsuarios(this.form, this);">Filtrar</button>
+                </form>
+
+                <button type="button" class="btn btn-flat btn-primary pull-right" onclick="BootModal.open(url_base + '/MantenedorUsuarios/nuevo','Agregar Nuevo Usuario');">Agregar Nuevo Usuario</button>
             </div>
             <div class="box-body">
                 <legend>Listado de Usuarios</legend>

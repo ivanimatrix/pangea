@@ -61,4 +61,10 @@ class Proyectos extends Model
     {
         return $this->hasMany('App\UsuariosProyectos', 'proyecto_fk_up', 'id_proyecto');
     }
+
+
+    public function comentarios()
+    {
+        return $this->hasMany('App\ComentariosProyectos', 'proyecto_fk_comentarioproy','id_proyecto');
+    }
 }

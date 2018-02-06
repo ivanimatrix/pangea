@@ -74,7 +74,8 @@ var Proyectos = {
                 success : function(response){
                     if(response.estado){
                         BootModal.success(response.mensaje, function(){
-                            window.location.href = url_base + '/Proyectos/index';
+                            BootModal.closeAll();
+                            Proyectos.listadoProyectos();
                         });
                     }else{
                         BootModal.danger(response.mensaje, function(){
@@ -170,6 +171,117 @@ var Proyectos = {
                 }
             })
         }
+    },
+
+
+    cargarCalendarioProyecto: function (proyecto) {
+        $("#calendario").fullCalendar({
+            eventSources: [
+                /* tareas prioridad 1 */
+                {
+                    url: url_base + '/TareasProyecto/listadoTareas',
+                    type: 'post',
+                    data: { prioridad: 1, proyecto: proyecto },
+                    color: 'yellow',
+                    textColor : 'black',
+                    error: function () {
+                        BootModal.danger("Error interno");
+                    }
+                },
+                /* tareas prioridad 2 */
+                {
+                    url: url_base + '/TareasProyecto/listadoTareas',
+                    type: 'post',
+                    data: { prioridad: 2, proyecto: proyecto },
+                    color: 'orange',
+                    textColor: 'white',
+                    error: function () {
+                        BootModal.danger("Error interno");
+                    }
+                },
+                /* tareas prioridad 3 */
+                {
+                    url: url_base + '/TareasProyecto/listadoTareas',
+                    type: 'post',
+                    data: { prioridad: 3, proyecto: proyecto },
+                    color: 'red',
+                    textColor: 'white',
+                    error: function () {
+                        BootModal.danger("Error interno");
+                    }
+                },
+            ]
+        });
+    },
+
+
+    listadoMuroProyecto: function (proyecto) {
+        
+    },
+
+
+    cerrarProyecto : function (form, btn) {
+        Pangea.btnProcess(btn, 'Cerrando');
+
+        var error = "";
+
+        if (form.comentario_cierre_proyecto.value == "") {
+            error += 'Debe ingresar un comentario de cierre <br/>';
+        }
+
+        if (error !== "") {
+            BootModal.danger(error, function() {
+                Pangea.btnEndProcess();
+            });
+        } else {
+            $.ajax({
+                url : url_base + '/ProyectosLider/cerrarProyecto',
+                data : $(form).serializeArray(),
+                dataType : 'json',
+                type : 'post',
+                success : function (response) {
+                    if (response.estado) {
+                        BootModal.success(response.mensaje, function() {
+                            window.location.href = url_base + '/ProyectosLider/misProyectos';
+                        });
+                    } else {
+                        BootModal.danger(response.mensaje, function() {
+                            Pangea.btnEndProcess();
+                        });
+                    }
+                },
+                error : function(){
+                    BootModal.danger(Pangea.msg_error, function(){
+                        Pangea.btnEndProcess();
+                    });
+                }
+            });
+        }
+
+    },
+
+
+    finalizar : function (proyecto) {
+        BootModal.confirm('¿Desea finalizar este proyecto?', function() {
+            $.ajax({
+                url : url_base + '/Proyectos/finalizar',
+                data : { proyecto: proyecto},
+                dataType : 'json',
+                type : 'post',
+                success : function (response) {
+                    if (response.estado) {
+                        BootModal.success(response.mensaje, function () {
+                            Proyectos.listadoProyectos();
+                        });
+                    } else {
+                        BootModal.danger(response.mensaje);
+                    }
+                },
+                error : function () {
+                    BootModal.danger(Pangea.msg_error);
+                }
+            })
+        });
     }
 
 };

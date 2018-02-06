@@ -27,3 +27,7 @@ table.table-middle > tbody > tr > td {
 .no-resize{
     resize: none;
 }
+
+.info-box-number{ font-size: 38px !important}
+
+.table > thead {background-color: #3C8DBC; color : #fff}

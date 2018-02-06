@@ -63,7 +63,7 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <!-- Messages: style can be found in dropdown.less-->
-                    <li class="dropdown messages-menu">
+                   {{-- <li class="dropdown messages-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-envelope-o"></i>
                             <span class="label label-success">4</span>
@@ -90,9 +90,9 @@
                             </li>
                             <li class="footer"><a href="#">See All Messages</a></li>
                         </ul>
-                    </li>
+                    </li>--}}
                     <!-- Notifications: style can be found in dropdown.less -->
-                    <li class="dropdown notifications-menu">
+                    {{--<li class="dropdown notifications-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-bell-o"></i>
                             <span class="label label-warning">10</span>
@@ -111,9 +111,9 @@
                             </li>
                             <li class="footer"><a href="#">View all</a></li>
                         </ul>
-                    </li>
+                    </li>--}}
                     <!-- Tasks: style can be found in dropdown.less -->
-                    <li class="dropdown tasks-menu">
+                    {{--<li class="dropdown tasks-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-flag-o"></i>
                             <span class="label label-danger">9</span>
@@ -144,7 +144,7 @@
                                 <a href="#">View all tasks</a>
                             </li>
                         </ul>
-                    </li>
+                    </li>--}}
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -154,20 +154,21 @@
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="{{ asset(session()->get('avatar')) }}" class="img-circle" alt="User Image">
+                                <img src="{{ asset(Usuario::getImagenUsuario(session()->get('id'))) }}" class="img-circle" alt="User Image">
 
                                 <p>
                                     {{ session()->get('nombres') }} {{ session()->get('apellidos') }}
-                                    <small>Member since Nov. 2012</small>
+                                    {{--<small>Member since Nov. 2012</small>--}}
                                 </p>
                             </li>
 
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="{{ url('/Usuario/miPerfil') }}" class="btn btn-default btn-flat">Mi Perfil</a>
-                                </div>
-                                <div class="pull-right">
+                                <div class="btn-group btn-group-justified">
+                                    <a href="{{ url('/Usuario/miPerfil') }}" class="btn btn-default btn-flat">Mi Cuenta</a>
+                                    @if (count(Usuario::getPerfiles(session()->get('id'))) > 1)
+                                        <a href="{{ url('/Home/cargarPerfil') }}" class="btn btn-default btn-flat">Perfiles</a>
+                                    @endif
                                     @if(session()->get('id_respaldo'))
                                         <a href="javascript:void(0);" class="btn btn-default btn-flat" onclick="MantenedorUsuarios.cerrarPerfilUsuario();">Volver</a>
                                     @else

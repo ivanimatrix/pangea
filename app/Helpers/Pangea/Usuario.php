@@ -81,4 +81,10 @@ class Usuario {
 
         return (isset($perfil->nombre_perfil) ? $perfil->nombre_perfil : '');
     }
+
+
+    public static function getPerfiles($id)
+    {
+        return DB::table('perfiles_usuarios')->where('usuario_fk_pu', $id)->get();
+    }
 }

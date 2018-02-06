@@ -18,7 +18,11 @@ class CreateEstadosTareasTable extends Migration
             $table->string('nombre_et', 50);
             $table->primary('id_et');
             //$table->timestamps();
+
+            
         });
+
+        $this->_populate();
     }
 
     /**
