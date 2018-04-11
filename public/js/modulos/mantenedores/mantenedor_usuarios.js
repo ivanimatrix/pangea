@@ -42,29 +42,32 @@ var MantenedorUsuarios = {
      */
     guardarUsuario : function(form, btn){
         Pangea.btnProcess(btn, 'Guardando');
-        
-        var error = "";
+
+        $(".mensajes-validacion").html('');
+        var validar = true;
 
         if(Validaciones.validaRut(form.rut.value) === false){
-            error += 'RUT de usuario mal formado<br/>';
+            validar = false;
+            $("#mensaje-rut").html('Rut no válido');
         }
         if(form.nombres.value === ""){
-            error += 'Falta ingresar los nombres del usuario <br/>';
+            validar = false;
+            $("#mensaje-nombres").html('Ingrese nombre(s) del usuario');
         }
         if(form.apellidos.value === ""){
-            error += 'Falta ingresar apellidos del usuario <br/>';
+            validar = false;
+            $("#mensaje-apellidos").html('Ingrese apellido(s) del usuario');
         }
         if(Validaciones.validaEmail(form.email.value) === false){
-            error += 'Debe ingresar un email válido';
+            validar = false;
+            $("#mensaje-email").html('Email no válido');
         }
         if($('.perfiles:checked').length == 0){
-            error += 'Debe seleccionar al menos un perfil para el usuario<br/>';
+            $("#mensaje-perfiles").html('Seleccione uno o más perfiles');
         }
 
-        if(error !== ""){
-            BootModal.danger(error, function () {
-                Pangea.btnEndProcess();
-            });
+        if(!validar){
+            Pangea.btnEndProcess();
         }else{
             $.ajax({
                 url : url_base + '/MantenedorUsuarios/guardar',

@@ -22,6 +22,7 @@ class CreateUsuariosTable extends Migration
             $table->string('pass_usuario', 250);
             $table->string('imagen_usuario', 250)->nullable();
             $table->date('registro_usuario');
+            $table->tinyInteger('estado_usuario');
             //$table->timestamps();
         });
     }

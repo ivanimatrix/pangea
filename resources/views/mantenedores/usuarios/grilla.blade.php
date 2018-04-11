@@ -25,6 +25,7 @@
                         @if($usuario->id_usuario != session()->get('id'))
                             <button type="button" class="btn btn-flat btn-success" onclick="MantenedorUsuarios.cargarPerfilUsuario({{ $usuario->id_usuario }})"><i class="fa fa-user"></i></button>
                             <button type="button" class="btn btn-flat btn-success" onclick="BootModal.open(url_base + '/MantenedorUsuarios/editar/{{ $usuario->id_usuario }}','Editar Usuario');"><i class="fa fa-edit"></i></button>
+                            <button type="button" class="btn btn-flat btn-danger" onclick=""
                         @endif
                     </div>
                 </td>

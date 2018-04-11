@@ -31,3 +31,5 @@ table.table-middle > tbody > tr > td {
 .info-box-number{ font-size: 38px !important}
 
 .table > thead {background-color: #3C8DBC; color : #fff}
+
+.label-square {border-radius:0px !important}

@@ -4,7 +4,7 @@
 
     <section class="content-header">
         <h1>
-            Dashboard
+            Panel de Control
             <small>Inicio</small>
         </h1>
     </section>

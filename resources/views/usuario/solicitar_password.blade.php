@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-xs-12">
-        <div class="box box-primary">
+        <div class="box box-solid">
             <form role="form">
 				<div class="box-body">
 						<label>Escriba su correo electrónico</label>
