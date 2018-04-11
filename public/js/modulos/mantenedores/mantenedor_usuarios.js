@@ -142,5 +142,66 @@ var MantenedorUsuarios = {
                 }
             })
         });
+    },
+
+    /**
+     * Desactiva un usuario
+     * @param usuario
+     */
+    desactivarUsuario : function (usuario) {
+        BootModal.confirm('¿Desea desactivar este usuario?', function () {
+            $.ajax({
+                url : url_base + '/MantenedorUsuario/desactivar',
+                data : { usuario : usuario},
+                type : 'post',
+                dataType : 'json',
+                success : function(response){
+                    if(response.correcto){
+                        BootModal.success(response.mensaje, function(){
+                            MantenedorUsuarios.cargarGrillaUsuarios();
+                            BootModal.closeAll();
+                        });
+                    }else{
+                        BootModal.danger(response.mensaje, function(){
+                            Pangea.btnEndProcess();
+                        });
+                    }
+                },
+                error :  function(){
+                    BootModal.danger(Pangea.msg_error, function(){
+                        Pangea.btnEndProcess();
+                    });
+                }
+            })
+        });
+    },
+
+    activarUsuario : function (usuario) {
+        BootModal.confirm('¿Desea activar este usuario?', function () {
+            $.ajax({
+                url : url_base + '/MantenedorUsuario/activar',
+                data : { usuario : usuario},
+                type : 'post',
+                dataType : 'json',
+                success : function(response){
+                    if(response.correcto){
+                        BootModal.success(response.mensaje, function(){
+                            MantenedorUsuarios.cargarGrillaUsuarios();
+                            BootModal.closeAll();
+                        });
+                    }else{
+                        BootModal.danger(response.mensaje, function(){
+                            Pangea.btnEndProcess();
+                        });
+                    }
+                },
+                error :  function(){
+                    BootModal.danger(Pangea.msg_error, function(){
+                        Pangea.btnEndProcess();
+                    });
+                }
+            })
+        });
     }
-}
+
+};

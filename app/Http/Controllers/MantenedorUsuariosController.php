@@ -96,6 +96,7 @@ class MantenedorUsuariosController extends Controller
             $usuario->pass_usuario = \Hash::make($pass);
             $usuario->imagen_usuario = 'public/img/user_default.png';
             $usuario->registro_usuario = date('Y-m-d');
+            $usuario->estado_usuario = 1;
             $enviar_mail = true;
         }
         $usuario->rut_usuario = $request->get('rut');
@@ -179,6 +180,43 @@ class MantenedorUsuariosController extends Controller
         }else{
             $response['estado'] = false;
             $response['mensaje'] = 'No se ha podido reestablecer su sesión';
+        }
+
+        return response()->json($response);
+    }
+
+
+    public function desactivarUsuario(Request $request)
+    {
+        $response = [];
+        $id_usuario = $request->get('usuario');
+
+        $usuario = $this->_Usuarios->find($id_usuario);
+        $usuario->estado_usuario = 0;
+        if ($usuario->save()) {
+            $response['correcto'] = true;
+            $response['mensaje'] = 'El usuario ha sido desactivado';
+        } else {
+            $response['correcto'] = false;
+            $response['mensaje'] = 'Hubo un problema al desactivar al usuario. Intente nuevamente';
+        }
+
+        return response()->json($response);
+    }
+
+
+    public function activarUsuario(Request $request)
+    {
+        $response = [];
+        $response['correcto'] = false;
+        $response['mensaje'] = 'Hubo un problema al activar al usuario. Intente nuevamente';
+        $id_usuario = $request->get('usuario');
+
+        $usuario = $this->_Usuarios->find($id_usuario);
+        $usuario->estado_usuario = 1;
+        if ($usuario->save()) {
+            $response['correcto'] = true;
+            $response['mensaje'] = 'El usuario ha sido activado';
         }
 
         return response()->json($response);

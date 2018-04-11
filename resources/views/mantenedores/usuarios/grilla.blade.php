@@ -12,7 +12,7 @@
     <tbody>
     @if($usuarios)
         @foreach($usuarios as $usuario)
-            <tr>
+            <tr @if($usuario->estado_usuario == 0) class="bg bg-gray disabled" @endif>
                 <td>{{ $usuario->rut_usuario }}</td>
                 <td>{{ $usuario->nombres_usuario }}</td>
                 <td>{{ $usuario->apellidos_usuario }}</td>
@@ -23,9 +23,13 @@
                 <td class="text-center">
                     <div class="btn-group">
                         @if($usuario->id_usuario != session()->get('id'))
-                            <button type="button" class="btn btn-flat btn-success" onclick="MantenedorUsuarios.cargarPerfilUsuario({{ $usuario->id_usuario }})"><i class="fa fa-user"></i></button>
-                            <button type="button" class="btn btn-flat btn-success" onclick="BootModal.open(url_base + '/MantenedorUsuarios/editar/{{ $usuario->id_usuario }}','Editar Usuario');"><i class="fa fa-edit"></i></button>
-                            <button type="button" class="btn btn-flat btn-danger" onclick=""
+                            <button type="button" class="btn btn-flat btn-success" onclick="MantenedorUsuarios.cargarPerfilUsuario({{ $usuario->id_usuario }})"><i class="fa fa-user" title="CARGAR PERFIL USUARIO"></i></button>
+                            <button type="button" class="btn btn-flat btn-success" onclick="BootModal.open(url_base + '/MantenedorUsuarios/editar/{{ $usuario->id_usuario }}','Editar Usuario');" title="EDITAR USUARIO"><i class="fa fa-edit"></i></button>
+                            @if($usuario->estado_usuario)
+                            <button type="button" class="btn btn-flat btn-danger" onclick="MantenedorUsuarios.desactivarUsuario({{ $usuario->id_usuario }});"><i class="fa fa-power-off" title="DESACTIVAR USUARIO"></i></button>
+                            @else
+                                <button type="button" class="btn btn-flat btn-success" onclick="MantenedorUsuarios.activarUsuario({{ $usuario->id_usuario }});"><i class="fa fa-power-off" data-toggle="tooltip" title="ACTIVAR USUARIO"></i></button>
+                            @endif
                         @endif
                     </div>
                 </td>

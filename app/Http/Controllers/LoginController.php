@@ -30,7 +30,7 @@ class LoginController extends Controller
         $passHash = Hash::make($pass);
 
         $usuarios = new Usuarios();
-        $usuario = $usuarios->where('rut_usuario', mb_strtolower($rut))->first();
+        $usuario = $usuarios->where(['rut_usuario' => mb_strtolower($rut), 'estado_usuario' => 1])->first();
 
         if($usuario and Hash::check($pass, $usuario->pass_usuario)){
             session()->put('id', $usuario->id_usuario);
