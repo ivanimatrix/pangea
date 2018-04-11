@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-xs-12">
-        <div class="box box-primary">
+        <div class="box box-solid">
             <form role="form" id="form-editar-avatar">
                 <div class="box-body">
                     <div class="form-group">
