@@ -33,11 +33,15 @@ var Tareas = {
         Pangea.btnProcess(btn, 'Registrando');
 
         var error = '';
-        if (form.texto_avance.value == "") {
+        if (form.texto_avance.value === "") {
             error += 'Debe escribir el registro de su avance<br/>';
         }
 
-        if (error != "") {
+        if (isNaN(form.horas_dedicadas.value) || form.horas_dedicadas.value === "") {
+            error += 'Debe indicar las horas dedicas<br/>';
+        }
+
+        if (error !== "") {
             BootModal.danger(error, function () {
                 Pangea.btnEndProcess();
             });

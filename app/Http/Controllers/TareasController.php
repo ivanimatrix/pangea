@@ -98,9 +98,15 @@ class TareasController extends Controller
     {
         $id_tarea = $request->get('tarea');
 
+        $total_horas_dedicadas = 0;
         $tarea_trazabilidad = $this->_TareaTrazabilidad->where(['tarea_fk_trazabilidad' => $id_tarea])->get();
+        if( $tarea_trazabilidad) {
+            foreach ($tarea_trazabilidad as $item) {
+                $total_horas_dedicadas += $item->horas_dedicadas_trazabilidad;
+            }
+        }
 
-        return view('tareas.grilla-trazabilidad-tarea', ['listado' => $tarea_trazabilidad]);
+        return view('tareas.grilla-trazabilidad-tarea', ['listado' => $tarea_trazabilidad, 'total_horas_dedicadas' => $total_horas_dedicadas]);
     }
 
 
@@ -110,6 +116,10 @@ class TareasController extends Controller
 
         $id_tarea = $request->get('id_tarea_avance');
         $texto = $request->get('texto_avance');
+        $horas_dedicadas = null;
+        if($request->get('horas_dedicadas')){
+            $horas_dedicadas = $request->get('horas_dedicadas');
+        }
 
         $tarea = $this->_Tareas->find($id_tarea);
         $tarea_trazabilidad = $this->_TareaTrazabilidad;
@@ -117,6 +127,7 @@ class TareasController extends Controller
         $tarea_trazabilidad->usuario_fk_trazabilidad = session()->get('id');
         $tarea_trazabilidad->descripcion_trazabilidad = nl2br($texto);
         $tarea_trazabilidad->tarea_fk_trazabilidad = $id_tarea;
+        $tarea_trazabilidad->horas_dedicadas_trazabilidad = $horas_dedicadas;
 
         if($tarea_trazabilidad->save()) {
             if ($tarea->estado_fk_tarea == \App\EstadosTareas::TAREA_CREADA) {
